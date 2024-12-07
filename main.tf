@@ -46,7 +46,7 @@ resource "azurerm_role_assignment" "this" {
   ]
 }
 
-# # Container App
+# Container App
 resource "azurerm_container_app" "this" {
   name                         = local.name
   container_app_environment_id = azurerm_container_app_environment.this.id
