@@ -23,7 +23,7 @@ resource "azurerm_log_analytics_workspace" "this" {
   sku                 = "PerGB2018"
 }
 
-# # Container App Environment
+# Container App Environment
 resource "azurerm_container_app_environment" "this" {
   name                       = local.name
   location                   = azurerm_resource_group.this.location
@@ -54,8 +54,10 @@ resource "azurerm_container_app" "this" {
   revision_mode                = "Single"
 
   template {
+    min_replicas = 1
+    max_replicas = 5
     container {
-      name   = "examplecontainer"
+      name   = "nginx"
       image  = "${azurerm_container_registry.this.login_server}/nginx-amd:latest"
       cpu    = 0.25
       memory = "0.5Gi"
